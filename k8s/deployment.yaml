@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: global-market-platform
+  namespace: global-market-platform
+  labels:
+    app: global-market-platform
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: global-market-platform
+  template:
+    metadata:
+      labels:
+        app: global-market-platform
+    spec:
+      containers:
+      - name: global-market-platform
+        image: docker.io/global-market-platform:latest
+        ports:
+        - containerPort: 3000
+          name: http
+        - containerPort: 3001
+          name: websocket
+        - containerPort: 9090
+          name: metrics
+        envFrom:
+        - configMapRef:
+            name: global-market-platform-config
+        - secretRef:
+            name: global-market-platform-secrets
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /api/health
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /api/health
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        volumeMounts:
+        - name: data
+          mountPath: /app/data
+      volumes:
+      - name: data
+        emptyDir: {}
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - global-market-platform
+              topologyKey: kubernetes.io/hostname

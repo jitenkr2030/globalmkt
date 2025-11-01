@@ -1,0 +1,68 @@
+[
+  {
+    "task": "volatility_prediction",
+    "predicted_volatility": 0,
+    "volatility_level": "low",
+    "timestamp": "2025-10-18T05:29:45.333553",
+    "model_version": "1.0.0",
+    "input_length": 30,
+    "prediction_type": "volatility",
+    "model_info": {
+      "name": "Kronos-Small",
+      "version": "1.0.0",
+      "description": "Simplified Kronos model for financial prediction",
+      "parameters": 125000000,
+      "architecture": "Transformer",
+      "max_sequence_length": 512,
+      "vocab_size": 10000,
+      "num_layers": 12,
+      "num_heads": 12,
+      "hidden_size": 768,
+      "intermediate_size": 3072
+    }
+  },
+  {
+    "task": "volatility_prediction",
+    "predicted_volatility": 1.2047771063627541,
+    "volatility_level": "high",
+    "timestamp": "2025-10-18T05:29:50.890776",
+    "model_version": "1.0.0",
+    "input_length": 30,
+    "prediction_type": "volatility",
+    "model_info": {
+      "name": "Kronos-Small",
+      "version": "1.0.0",
+      "description": "Simplified Kronos model for financial prediction",
+      "parameters": 125000000,
+      "architecture": "Transformer",
+      "max_sequence_length": 512,
+      "vocab_size": 10000,
+      "num_layers": 12,
+      "num_heads": 12,
+      "hidden_size": 768,
+      "intermediate_size": 3072
+    }
+  },
+  {
+    "task": "volatility_prediction",
+    "predicted_volatility": 0,
+    "volatility_level": "low",
+    "timestamp": "2025-10-18T05:29:56.399022",
+    "model_version": "1.0.0",
+    "input_length": 30,
+    "prediction_type": "volatility",
+    "model_info": {
+      "name": "Kronos-Small",
+      "version": "1.0.0",
+      "description": "Simplified Kronos model for financial prediction",
+      "parameters": 125000000,
+      "architecture": "Transformer",
+      "max_sequence_length": 512,
+      "vocab_size": 10000,
+      "num_layers": 12,
+      "num_heads": 12,
+      "hidden_size": 768,
+      "intermediate_size": 3072
+    }
+  }
+]

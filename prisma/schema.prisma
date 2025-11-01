@@ -1,0 +1,296 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  // Relations
+  portfolios Portfolio[]
+  orders     Order[]
+  positions  Position[]
+  posts      Post[]
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  title     String
+  content   String?
+  published Boolean  @default(false)
+  authorId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+}
+
+// Portfolio Management
+model Portfolio {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  totalValue  Float    @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  userId      String
+  
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  positions  Position[]
+  orders     Order[]
+  
+  @@unique([userId, name])
+}
+
+// Asset/Instrument
+model Instrument {
+  id          String   @id @default(cuid())
+  symbol      String   @unique
+  name        String
+  type        String   // 'stock', 'forex', 'crypto', 'commodity', 'index'
+  exchange    String
+  currency    String
+  tickSize    Float
+  lotSize     Int      @default(1)
+  currentPrice Float?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  positions   Position[]
+  orders      Order[]
+  predictions MLPrediction[]
+  signals     TradingSignal[]
+  sentiments  MarketSentiment[]
+  patterns    PatternRecognition[]
+}
+
+// Portfolio Positions
+model Position {
+  id            String   @id @default(cuid())
+  portfolioId   String
+  instrumentId  String
+  userId        String
+  quantity      Float
+  averagePrice  Float
+  currentPrice  Float
+  unrealizedPnL Float
+  realizedPnL   Float    @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  portfolio  Portfolio  @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  instrument Instrument @relation(fields: [instrumentId], references: [id], onDelete: Cascade)
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  orders     Order[]
+  
+  @@unique([portfolioId, instrumentId])
+}
+
+// Order Management
+model Order {
+  id             String      @id @default(cuid())
+  portfolioId    String
+  instrumentId   String
+  userId         String
+  signalId       String?
+  type           OrderType
+  side           OrderSide
+  quantity       Float
+  price          Float?
+  stopPrice      Float?
+  limitPrice     Float?
+  status         OrderStatus
+  timeInForce    TimeInForce
+  orderType      AdvancedOrderType?
+  parentOrderId  String?
+  triggerPrice   Float?
+  trailAmount    Float?
+  trailPercent   Float?
+  icebergQty     Float?
+  displayQty     Float?
+  strategy       String?
+  tags           String?   // JSON string array
+  notes          String?
+  filledQuantity Float       @default(0)
+  averagePrice   Float?
+  commission     Float       @default(0)
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  expiresAt      DateTime?
+  executedAt     DateTime?
+  
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  portfolio  Portfolio  @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  instrument Instrument @relation(fields: [instrumentId], references: [id], onDelete: Cascade)
+  position   Position?  @relation(fields: [id], references: [id])
+  signal     TradingSignal? @relation(fields: [signalId], references: [id], onDelete: SetNull)
+  
+  parentOrder Order?     @relation("ChildOrders", fields: [parentOrderId], references: [id])
+  childOrders Order[]    @relation("ChildOrders")
+}
+
+// Enums
+enum OrderType {
+  MARKET
+  LIMIT
+  STOP
+  STOP_LIMIT
+}
+
+enum OrderSide {
+  BUY
+  SELL
+}
+
+enum OrderStatus {
+  PENDING
+  OPEN
+  PARTIALLY_FILLED
+  FILLED
+  CANCELLED
+  REJECTED
+  EXPIRED
+}
+
+enum TimeInForce {
+  DAY
+  GTC
+  IOC
+  FOK
+}
+
+enum AdvancedOrderType {
+  TRAILING_STOP
+  ICEBERG
+  OCO
+  BRACKET
+  IF_THEN
+  IF_THEN_OCO
+}
+
+// Machine Learning Models
+model MLPrediction {
+  id            String   @id @default(cuid())
+  instrumentId  String
+  modelId       String?
+  modelType     String   // 'price', 'volume', 'volatility', 'sentiment', 'trend'
+  predictionType String // 'short_term', 'medium_term', 'long_term'
+  predictedValue Float
+  confidence    Float   // 0-1 confidence score
+  actualValue   Float?
+  accuracy      Float?
+  timestamp     DateTime @default(now())
+  expiresAt     DateTime
+  modelVersion  String
+  features      String?  // JSON string of features used
+  metadata      String?  // JSON string for additional metadata
+  
+  instrument    Instrument @relation(fields: [instrumentId], references: [id], onDelete: Cascade)
+  model         MLModel?    @relation(fields: [modelId], references: [id], onDelete: SetNull)
+  
+  @@index([instrumentId, predictionType])
+  @@index([timestamp])
+}
+
+model TradingSignal {
+  id            String   @id @default(cuid())
+  instrumentId  String
+  modelId       String?
+  signalType    String   // 'BUY', 'SELL', 'HOLD', 'STRONG_BUY', 'STRONG_SELL'
+  strategy      String   // 'ml_prediction', 'technical_analysis', 'sentiment_analysis', 'combined'
+  strength      Float    // 0-1 signal strength
+  confidence    Float    // 0-1 confidence score
+  priceTarget   Float?
+  stopLoss      Float?
+  timeframe     String   // '1m', '5m', '15m', '30m', '1h', '4h', '1d', '1w'
+  riskReward    Float?
+  status        String   // 'ACTIVE', 'EXECUTED', 'EXPIRED', 'CANCELLED'
+  createdAt     DateTime @default(now())
+  expiresAt     DateTime
+  executedAt    DateTime?
+  notes         String?
+  
+  instrument    Instrument @relation(fields: [instrumentId], references: [id], onDelete: Cascade)
+  model         MLModel?    @relation(fields: [modelId], references: [id], onDelete: SetNull)
+  orders        Order[]
+  
+  @@index([instrumentId, signalType])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model MLModel {
+  id            String   @id @default(cuid())
+  name          String
+  type          String   // 'neural_network', 'random_forest', 'svm', 'gradient_boosting', 'lstm', 'transformer'
+  version       String
+  description   String?
+  accuracy      Float?
+  precision     Float?
+  recall        Float?
+  f1Score       Float?
+  trainingData  String?  // JSON string describing training data
+  features      String?  // JSON string of features
+  hyperparameters String? // JSON string of hyperparameters
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  lastTrained   DateTime?
+  
+  predictions   MLPrediction[]
+  signals       TradingSignal[]
+  
+  @@unique([name, version])
+}
+
+model MarketSentiment {
+  id            String   @id @default(cuid())
+  instrumentId  String
+  source        String   // 'news', 'social_media', 'analyst_ratings', 'options_market'
+  sentiment     Float    // -1 to 1 (negative to positive)
+  confidence    Float    // 0-1 confidence score
+  volume        Int?     // Social media volume, news count, etc.
+  timestamp     DateTime @default(now())
+  metadata      String?  // JSON string for additional data
+  
+  instrument    Instrument @relation(fields: [instrumentId], references: [id], onDelete: Cascade)
+  
+  @@index([instrumentId, source])
+  @@index([timestamp])
+}
+
+model PatternRecognition {
+  id            String   @id @default(cuid())
+  instrumentId  String
+  patternType   String   // 'head_shoulders', 'double_top', 'double_bottom', 'triangle', 'flag', 'pennant', etc.
+  direction     String   // 'bullish', 'bearish'
+  confidence    Float    // 0-1 confidence score
+  timeframe     String   // '1m', '5m', '15m', '30m', '1h', '4h', '1d'
+  startPrice    Float
+  endPrice      Float
+  targetPrice   Float?
+  stopPrice     Float?
+  status        String   // 'FORMING', 'CONFIRMED', 'FAILED', 'COMPLETED'
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  completedAt   DateTime?
+  
+  instrument    Instrument @relation(fields: [instrumentId], references: [id], onDelete: Cascade)
+  
+  @@index([instrumentId, patternType])
+  @@index([status])
+}

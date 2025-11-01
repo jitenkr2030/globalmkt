@@ -1,0 +1,122 @@
+{
+  "embeddings.word_embeddings": {
+    "shape": [
+      10000,
+      768
+    ],
+    "mean": -5.208137101443372e-07,
+    "std": 0.02000229193829072
+  },
+  "embeddings.position_embeddings": {
+    "shape": [
+      10000,
+      768
+    ],
+    "mean": 1.6887026963417313e-06,
+    "std": 0.02000297120161902
+  },
+  "embeddings.token_type_embeddings": {
+    "shape": [
+      10000,
+      768
+    ],
+    "mean": -5.944998800082714e-06,
+    "std": 0.020003996852143754
+  },
+  "embeddings.LayerNorm": {
+    "shape": [
+      10000,
+      768
+    ],
+    "mean": 8.511010332030699e-06,
+    "std": 0.02000145077760596
+  },
+  "encoder.layer.*.attention.self.query": {
+    "shape": [
+      768,
+      768
+    ],
+    "mean": -1.7603662936699416e-05,
+    "std": 0.01999782615062408
+  },
+  "encoder.layer.*.attention.self.key": {
+    "shape": [
+      768,
+      768
+    ],
+    "mean": -2.117416774368574e-05,
+    "std": 0.020007991504156622
+  },
+  "encoder.layer.*.attention.self.value": {
+    "shape": [
+      768,
+      768
+    ],
+    "mean": 2.5881669513496152e-05,
+    "std": 0.01997670800087979
+  },
+  "encoder.layer.*.attention.output.dense": {
+    "shape": [
+      768,
+      768
+    ],
+    "mean": -9.947973357712012e-06,
+    "std": 0.019992668033416688
+  },
+  "encoder.layer.*.attention.output.LayerNorm": {
+    "shape": [
+      768,
+      768
+    ],
+    "mean": -4.1484471621444526e-05,
+    "std": 0.020002857505621134
+  },
+  "encoder.layer.*.intermediate.dense": {
+    "shape": [
+      768,
+      3072
+    ],
+    "mean": -1.296483587299625e-05,
+    "std": 0.02000182997157937
+  },
+  "encoder.layer.*.intermediate.LayerNorm": {
+    "shape": [
+      768,
+      3072
+    ],
+    "mean": -1.7795272633030122e-06,
+    "std": 0.01999316633788761
+  },
+  "encoder.layer.*.output.dense": {
+    "shape": [
+      3072,
+      768
+    ],
+    "mean": 3.5760814907622178e-06,
+    "std": 0.02000124155929935
+  },
+  "encoder.layer.*.output.LayerNorm": {
+    "shape": [
+      3072,
+      768
+    ],
+    "mean": 9.553890881792817e-06,
+    "std": 0.019999702253541533
+  },
+  "pooler.dense": {
+    "shape": [
+      768,
+      768
+    ],
+    "mean": -5.9656950268896855e-05,
+    "std": 0.019997970652840664
+  },
+  "classifier": {
+    "shape": [
+      768,
+      768
+    ],
+    "mean": -1.0342221569252214e-05,
+    "std": 0.020001614475978095
+  }
+}

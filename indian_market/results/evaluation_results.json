@@ -1,0 +1,63 @@
+{
+  "evaluation_timestamp": "2025-10-18T05:30:46.256019",
+  "test_data_size": 1,
+  "accuracy_metrics": {
+    "overall_accuracy": 0.0,
+    "correct_predictions": 0,
+    "total_predictions": 1,
+    "class_0_accuracy": 0.0,
+    "class_1_accuracy": 0.0,
+    "class_2_accuracy": 0.0
+  },
+  "confusion_matrix": {
+    "confusion_matrix": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        0
+      ]
+    ],
+    "class_names": [
+      "down",
+      "neutral",
+      "up"
+    ]
+  },
+  "precision_recall_f1": {
+    "down_precision": 0.0,
+    "down_recall": 0.0,
+    "down_f1": 0.0,
+    "neutral_precision": 0.0,
+    "neutral_recall": 0.0,
+    "neutral_f1": 0.0,
+    "up_precision": 0.0,
+    "up_recall": 0.0,
+    "up_f1": 0.0,
+    "macro_precision": 0.0,
+    "macro_recall": 0.0,
+    "macro_f1": 0.0
+  },
+  "model_info": {
+    "name": "Kronos-Small",
+    "version": "1.0.0",
+    "description": "Simplified Kronos model for financial prediction",
+    "parameters": 125000000,
+    "architecture": "Transformer",
+    "max_sequence_length": 512,
+    "vocab_size": 10000,
+    "num_layers": 12,
+    "num_heads": 12,
+    "hidden_size": 768,
+    "intermediate_size": 3072
+  }
+}

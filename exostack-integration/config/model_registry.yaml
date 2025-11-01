@@ -1,0 +1,180 @@
+# ExoStack Model Registry
+# This file defines available models and their configurations for distributed inference
+
+models:
+  # Small/Test Models
+  tinyllama:
+    hf_repo: "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
+    type: "causal_lm"
+    size_gb: 2.2
+    min_ram_gb: 4
+    recommended_ram_gb: 8
+    quantized_versions:
+      - "4bit"
+      - "8bit"
+    supports_gpu: true
+    supports_cpu: true
+    description: "1B parameter model for testing and lightweight inference"
+    tags: ["small", "test", "chat"]
+
+  phi2:
+    hf_repo: "microsoft/phi-2"
+    type: "causal_lm"
+    size_gb: 5.4
+    min_ram_gb: 8
+    recommended_ram_gb: 16
+    quantized_versions:
+      - "4bit"
+      - "8bit"
+    supports_gpu: true
+    supports_cpu: true
+    description: "2.7B parameter model for fast CPU/GPU inference"
+    tags: ["small", "fast", "microsoft"]
+
+  # Medium Models
+  mistral_7b:
+    hf_repo: "mistralai/Mistral-7B-Instruct-v0.2"
+    type: "causal_lm"
+    size_gb: 14.5
+    min_ram_gb: 16
+    recommended_ram_gb: 32
+    quantized_versions:
+      - "4bit"
+      - "8bit"
+      - "gptq"
+    supports_gpu: true
+    supports_cpu: false
+    description: "7B parameter instruction-tuned model"
+    tags: ["medium", "instruct", "mistral"]
+
+  mistral_7b_q4:
+    hf_repo: "TheBloke/Mistral-7B-Instruct-v0.2-GGUF"
+    type: "causal_lm"
+    size_gb: 4.1
+    min_ram_gb: 8
+    recommended_ram_gb: 16
+    quantized_versions:
+      - "q4_0"
+      - "q4_1"
+      - "q5_0"
+    supports_gpu: true
+    supports_cpu: true
+    description: "Quantized 7B parameter model for efficient inference"
+    tags: ["medium", "quantized", "gguf"]
+
+  # Specialized Models
+  esm3:
+    hf_repo: "facebook/esm2_t33_650M_UR50D"
+    type: "protein_lm"
+    size_gb: 2.5
+    min_ram_gb: 6
+    recommended_ram_gb: 12
+    quantized_versions:
+      - "8bit"
+    supports_gpu: true
+    supports_cpu: true
+    description: "Protein language model for biological sequences"
+    tags: ["bio", "protein", "specialized"]
+
+  glm4_6b:
+    hf_repo: "THUDM/glm-4-9b-chat"
+    type: "causal_lm"
+    size_gb: 18.2
+    min_ram_gb: 20
+    recommended_ram_gb: 40
+    quantized_versions:
+      - "4bit"
+      - "8bit"
+    supports_gpu: true
+    supports_cpu: false
+    description: "Chinese/English multilingual model"
+    tags: ["multilingual", "chinese", "chat"]
+
+  # Large Models
+  llama2_13b:
+    hf_repo: "meta-llama/Llama-2-13b-chat-hf"
+    type: "causal_lm"
+    size_gb: 26.0
+    min_ram_gb: 32
+    recommended_ram_gb: 64
+    quantized_versions:
+      - "4bit"
+      - "8bit"
+      - "gptq"
+    supports_gpu: true
+    supports_cpu: false
+    description: "13B parameter chat model requiring GPU"
+    tags: ["large", "chat", "llama"]
+
+  # Financial AI Models
+  kronos_indian_stocks:
+    hf_repo: "local/kronos-indian-stocks"
+    type: "financial_prediction"
+    size_gb: 8.5
+    min_ram_gb: 16
+    recommended_ram_gb: 32
+    quantized_versions:
+      - "4bit"
+      - "8bit"
+    supports_gpu: true
+    supports_cpu: false
+    description: "Specialized AI model for Indian stock market prediction and analysis"
+    tags: ["financial", "indian-stocks", "prediction", "kronos"]
+    specialized_config:
+      market: "indian"
+      supported_symbols: ["RELIANCE.NS", "TCS.NS", "HDFCBANK.NS", "INFY.NS", "ICICIBANK.NS", "HINDUNILVR.NS", "ITC.NS", "BHARTIARTL.NS", "LT.NS", "SBIN.NS", "WIPRO.NS", "HCLTECH.NS", "TECHM.NS", "TATASTEEL.NS", "JSWSTEEL.NS", "TATAMOTORS.NS", "MARUTI.NS", "NESTLEIND.NS", "ASIANPAINT.NS", "HDFC.NS", "COALINDIA.NS", "NTPC.NS", "POWERGRID.NS", "ONGC.NS", "BPCL.NS"]
+      regions: ["MUMBAI", "DELHI", "BANGALORE", "CHENNAI", "KOLKATA"]
+      prediction_types: ["price", "trend", "volatility", "volume"]
+      timeframes: ["1m", "5m", "15m", "30m", "1h", "4h", "1d", "1w", "1M"]
+      features: ["technical", "fundamental", "sentiment", "market_regime"]
+
+  kronos_market_data:
+    hf_repo: "local/kronos-market-data"
+    type: "data_processor"
+    size_gb: 2.1
+    min_ram_gb: 4
+    recommended_ram_gb: 8
+    quantized_versions:
+      - "8bit"
+    supports_gpu: true
+    supports_cpu: true
+    description: "Real-time market data processing and feature extraction"
+    tags: ["data", "market", "realtime", "kronos"]
+    specialized_config:
+      data_sources: ["nse", "bse", "mcx", "ncdex"]
+      update_frequency: "realtime"
+      supported_exchanges: ["NSE", "BSE", "MCX", "NCDEX"]
+
+  # Default fallback model
+  dialogpt_medium:
+    hf_repo: "microsoft/DialoGPT-medium"
+    type: "causal_lm"
+    size_gb: 1.4
+    min_ram_gb: 3
+    recommended_ram_gb: 6
+    quantized_versions:
+      - "8bit"
+    supports_gpu: true
+    supports_cpu: true
+    description: "Default conversational model"
+    tags: ["default", "conversation", "microsoft"]
+
+# Model categories for easy filtering
+categories:
+  small_models: ["tinyllama", "phi2", "dialogpt_medium", "kronos_market_data"]
+  medium_models: ["mistral_7b", "mistral_7b_q4", "glm4_6b", "kronos_indian_stocks"]
+  large_models: ["llama2_13b"]
+  cpu_compatible: ["tinyllama", "phi2", "mistral_7b_q4", "esm3", "dialogpt_medium", "kronos_market_data"]
+  gpu_only: ["mistral_7b", "glm4_6b", "llama2_13b", "kronos_indian_stocks"]
+  quantized_available: ["tinyllama", "phi2", "mistral_7b", "mistral_7b_q4", "glm4_6b", "llama2_13b", "kronos_indian_stocks"]
+  specialized: ["esm3", "kronos_indian_stocks", "kronos_market_data"]
+  financial: ["kronos_indian_stocks", "kronos_market_data"]
+  indian_market: ["kronos_indian_stocks", "kronos_market_data"]
+
+# Default configurations
+defaults:
+  quantization: "8bit"
+  torch_dtype: "auto"
+  trust_remote_code: true
+  use_cache: true
+  device_map: "auto"

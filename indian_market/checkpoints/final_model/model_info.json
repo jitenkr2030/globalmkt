@@ -1,0 +1,13 @@
+{
+  "name": "Kronos-Small",
+  "version": "1.0.0",
+  "description": "Simplified Kronos model for financial prediction",
+  "parameters": 125000000,
+  "architecture": "Transformer",
+  "max_sequence_length": 512,
+  "vocab_size": 10000,
+  "num_layers": 12,
+  "num_heads": 12,
+  "hidden_size": 768,
+  "intermediate_size": 3072
+}

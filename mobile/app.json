@@ -1,0 +1,75 @@
+{
+  "name": "GlobalMarkets",
+  "displayName": "Global Markets",
+  "version": "1.0.0",
+  "versionCode": 1,
+  "description": "Professional trading platform with real-time market data",
+  "orientation": "portrait",
+  "userInterfaceStyle": "automatic",
+  "icon": "./assets/icon.png",
+  "splash": {
+    "image": "./assets/splash.png",
+    "resizeMode": "contain",
+    "backgroundColor": "#ffffff"
+  },
+  "assetBundlePatterns": [
+    "**/*"
+  ],
+  "ios": {
+    "supportsTablet": true,
+    "bundleIdentifier": "com.globalmarkets.trading",
+    "buildNumber": "1",
+    "infoPlist": {
+      "NSCameraUsageDescription": "This app needs access to camera to scan QR codes",
+      "NSMicrophoneUsageDescription": "This app needs access to microphone for voice commands",
+      "NSLocationWhenInUseUsageDescription": "This app needs access to location for local market data",
+      "UIBackgroundModes": ["fetch", "location-updates"],
+      "NSAppTransportSecurity": {
+        "NSAllowsArbitraryLoads": true
+      }
+    }
+  },
+  "android": {
+    "package": "com.globalmarkets.trading",
+    "versionCode": 1,
+    "adaptiveIcon": {
+      "foregroundImage": "./assets/adaptive-icon.png",
+      "backgroundColor": "#FFFFFF"
+    },
+    "permissions": [
+      "android.permission.INTERNET",
+      "android.permission.ACCESS_NETWORK_STATE",
+      "android.permission.WAKE_LOCK",
+      "android.permission.VIBRATE",
+      "android.permission.RECEIVE_BOOT_COMPLETED",
+      "android.permission.FOREGROUND_SERVICE",
+      "android.permission.ACCESS_FINE_LOCATION",
+      "android.permission.ACCESS_COARSE_LOCATION",
+      "android.permission.CAMERA",
+      "android.permission.RECORD_AUDIO",
+      "android.permission.READ_EXTERNAL_STORAGE",
+      "android.permission.WRITE_EXTERNAL_STORAGE"
+    ],
+    "usesCleartextTraffic": true
+  },
+  "plugins": [
+    [
+      "react-native-biometrics",
+      {
+        "faceID": true,
+        "touchID": true,
+        "biometrySecret": "global-markets-biometric-secret"
+      }
+    ],
+    [
+      "react-native-push-notification",
+      {
+        "permissions": {
+          "alert": true,
+          "badge": true,
+          "sound": true
+        }
+      }
+    ]
+  ]
+}

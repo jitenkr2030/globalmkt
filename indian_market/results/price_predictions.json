@@ -1,0 +1,167 @@
+[
+  {
+    "task": "price_prediction",
+    "predicted_class": 0,
+    "class_name": "down",
+    "confidence": -3.172728194892784,
+    "logits": [
+      0.6092049568953541,
+      -0.7248594545080109,
+      -0.0763584702413201
+    ],
+    "probabilities": [
+      -3.172728194892784,
+      3.775054688281555,
+      0.39767350661122863
+    ],
+    "timestamp": "2025-10-18T05:29:18.346050",
+    "model_version": "1.0.0",
+    "input_length": 30,
+    "prediction_type": "price_movement",
+    "model_info": {
+      "name": "Kronos-Small",
+      "version": "1.0.0",
+      "description": "Simplified Kronos model for financial prediction",
+      "parameters": 125000000,
+      "architecture": "Transformer",
+      "max_sequence_length": 512,
+      "vocab_size": 10000,
+      "num_layers": 12,
+      "num_heads": 12,
+      "hidden_size": 768,
+      "intermediate_size": 3072
+    }
+  },
+  {
+    "task": "price_prediction",
+    "predicted_class": 2,
+    "class_name": "up",
+    "confidence": 0.976403655537795,
+    "logits": [
+      0.07539119072417376,
+      -0.022422176289804446,
+      2.1918284591408863
+    ],
+    "probabilities": [
+      0.03358485191276491,
+      -0.009988507450559885,
+      0.976403655537795
+    ],
+    "timestamp": "2025-10-18T05:29:23.831527",
+    "model_version": "1.0.0",
+    "input_length": 30,
+    "prediction_type": "price_movement",
+    "model_info": {
+      "name": "Kronos-Small",
+      "version": "1.0.0",
+      "description": "Simplified Kronos model for financial prediction",
+      "parameters": 125000000,
+      "architecture": "Transformer",
+      "max_sequence_length": 512,
+      "vocab_size": 10000,
+      "num_layers": 12,
+      "num_heads": 12,
+      "hidden_size": 768,
+      "intermediate_size": 3072
+    }
+  },
+  {
+    "task": "price_prediction",
+    "predicted_class": 0,
+    "class_name": "down",
+    "confidence": -0.7361471215580038,
+    "logits": [
+      0.7576483430128634,
+      -1.417636924129901,
+      -0.36921919654750573
+    ],
+    "probabilities": [
+      -0.7361471215580038,
+      1.377405957178805,
+      0.35874116437919873
+    ],
+    "timestamp": "2025-10-18T05:29:29.152777",
+    "model_version": "1.0.0",
+    "input_length": 30,
+    "prediction_type": "price_movement",
+    "model_info": {
+      "name": "Kronos-Small",
+      "version": "1.0.0",
+      "description": "Simplified Kronos model for financial prediction",
+      "parameters": 125000000,
+      "architecture": "Transformer",
+      "max_sequence_length": 512,
+      "vocab_size": 10000,
+      "num_layers": 12,
+      "num_heads": 12,
+      "hidden_size": 768,
+      "intermediate_size": 3072
+    }
+  },
+  {
+    "task": "price_prediction",
+    "predicted_class": 0,
+    "class_name": "down",
+    "confidence": 0.7084122119801255,
+    "logits": [
+      2.2563215141560233,
+      1.0899452966983694,
+      -0.1612264120599624
+    ],
+    "probabilities": [
+      0.7084122119801255,
+      0.3422076834915264,
+      -0.05061989547165186
+    ],
+    "timestamp": "2025-10-18T05:29:34.404735",
+    "model_version": "1.0.0",
+    "input_length": 30,
+    "prediction_type": "price_movement",
+    "model_info": {
+      "name": "Kronos-Small",
+      "version": "1.0.0",
+      "description": "Simplified Kronos model for financial prediction",
+      "parameters": 125000000,
+      "architecture": "Transformer",
+      "max_sequence_length": 512,
+      "vocab_size": 10000,
+      "num_layers": 12,
+      "num_heads": 12,
+      "hidden_size": 768,
+      "intermediate_size": 3072
+    }
+  },
+  {
+    "task": "price_prediction",
+    "predicted_class": 0,
+    "class_name": "down",
+    "confidence": -0.6671312100057079,
+    "logits": [
+      0.7372487385509617,
+      -0.9008039901473232,
+      -0.9415478038350491
+    ],
+    "probabilities": [
+      -0.6671312100057079,
+      0.8151312094559968,
+      0.852000000549711
+    ],
+    "timestamp": "2025-10-18T05:29:39.796640",
+    "model_version": "1.0.0",
+    "input_length": 30,
+    "prediction_type": "price_movement",
+    "model_info": {
+      "name": "Kronos-Small",
+      "version": "1.0.0",
+      "description": "Simplified Kronos model for financial prediction",
+      "parameters": 125000000,
+      "architecture": "Transformer",
+      "max_sequence_length": 512,
+      "vocab_size": 10000,
+      "num_layers": 12,
+      "num_heads": 12,
+      "hidden_size": 768,
+      "intermediate_size": 3072
+    }
+  }
+]

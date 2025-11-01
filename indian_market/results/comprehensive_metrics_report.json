@@ -1,0 +1,119 @@
+{
+  "report_timestamp": "2025-10-18T05:37:11.862509",
+  "model_info": {
+    "name": "Kronos-Small",
+    "version": "1.0.0",
+    "description": "Simplified Kronos model for financial prediction",
+    "parameters": 125000000,
+    "architecture": "Transformer",
+    "max_sequence_length": 512,
+    "vocab_size": 10000,
+    "num_layers": 12,
+    "num_heads": 12,
+    "hidden_size": 768,
+    "intermediate_size": 3072
+  },
+  "test_data_info": {
+    "num_sequences": 10,
+    "num_labels": 10,
+    "label_distribution": {
+      "down": 5,
+      "neutral": 3,
+      "up": 2
+    }
+  },
+  "evaluation_results": {
+    "evaluation_timestamp": "2025-10-18T05:37:11.861826",
+    "test_data_size": 10,
+    "accuracy_metrics": {
+      "overall_accuracy": 0.4,
+      "correct_predictions": 4,
+      "total_predictions": 10,
+      "class_0_accuracy": 0.4,
+      "class_1_accuracy": 0.3333333333333333,
+      "class_2_accuracy": 0.5
+    },
+    "confusion_matrix": {
+      "confusion_matrix": [
+        [
+          2,
+          2,
+          1
+        ],
+        [
+          2,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ]
+      ],
+      "class_names": [
+        "down",
+        "neutral",
+        "up"
+      ]
+    },
+    "precision_recall_f1": {
+      "down_precision": 0.4,
+      "down_recall": 0.4,
+      "down_f1": 0.4000000000000001,
+      "neutral_precision": 0.3333333333333333,
+      "neutral_recall": 0.3333333333333333,
+      "neutral_f1": 0.3333333333333333,
+      "up_precision": 0.5,
+      "up_recall": 0.5,
+      "up_f1": 0.5,
+      "macro_precision": 0.41111111111111115,
+      "macro_recall": 0.41111111111111115,
+      "macro_f1": 0.41111111111111115
+    },
+    "model_info": {
+      "name": "Kronos-Small",
+      "version": "1.0.0",
+      "description": "Simplified Kronos model for financial prediction",
+      "parameters": 125000000,
+      "architecture": "Transformer",
+      "max_sequence_length": 512,
+      "vocab_size": 10000,
+      "num_layers": 12,
+      "num_heads": 12,
+      "hidden_size": 768,
+      "intermediate_size": 3072
+    }
+  },
+  "performance_summary": {
+    "overall_accuracy": 0.4,
+    "macro_f1_score": 0.41111111111111115,
+    "performance_rating": "Very Poor",
+    "strengths": [
+      "No significant strengths identified"
+    ],
+    "weaknesses": [
+      "Low overall accuracy",
+      "Low precision for down class",
+      "Low recall for down class",
+      "Low F1 score for down class",
+      "Low precision for neutral class",
+      "Low recall for neutral class",
+      "Low F1 score for neutral class",
+      "Low precision for up class",
+      "Low recall for up class",
+      "Low F1 score for up class"
+    ]
+  },
+  "recommendations": [
+    "Model performance is below acceptable threshold. Consider retraining with more data.",
+    "Review feature engineering and data preprocessing steps.",
+    "Class imbalance detected. Consider balanced sampling or class weights.",
+    "Low precision for down class. Review false positives.",
+    "Low recall for down class. Review false negatives.",
+    "Low precision for neutral class. Review false positives.",
+    "Low recall for neutral class. Review false negatives.",
+    "Low precision for up class. Review false positives.",
+    "Low recall for up class. Review false negatives."
+  ]
+}

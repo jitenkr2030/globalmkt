@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: global-market-platform-config
+  namespace: global-market-platform
+data:
+  NODE_ENV: "production"
+  NEXT_TELEMETRY_DISABLED: "1"
+  # Database configuration
+  DATABASE_URL: "file:./dev.db"
+  # Redis configuration
+  REDIS_URL: "redis://redis:6379"
+  # AI Service configuration
+  ZAI_API_URL: "https://api.z-ai.com"
+  # Market data configuration
+  MARKET_DATA_API_URL: "https://api.marketdata.com"
+  # WebSocket configuration
+  WS_PORT: "3001"
+  # Performance monitoring
+  ENABLE_METRICS: "true"
+  METRICS_PORT: "9090"
