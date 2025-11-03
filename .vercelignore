@@ -1,0 +1,80 @@
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# Testing
+/coverage
+
+# Next.js
+/.next/
+/out/
+next-env.d.ts
+
+# Production
+/build
+
+# Misc
+.DS_Store
+*.pem
+
+# Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Local env files
+.env
+.env*.local
+.env.development
+.env.production
+
+# Vercel
+.vercel
+
+# Typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# Database
+/db/*.db
+/db/*.db-journal
+
+# Logs
+logs
+*.log
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+
+# Dev tools
+dev.log
+server.log
+
+# Cache
+.cache
+.temp
+tmp
+
+# Python (from kronos-env)
+kronos-env/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+pyvenv.cfg
+
+# ML models (for local development)
+/indian_market/checkpoints/
+/indian_market/models/
+
+# Docker
+Dockerfile.local
