@@ -15,28 +15,21 @@ import {
   ResponsiveContainer,
   AreaChart,
   Area,
-  CandlestickChart,
   BarChart,
   Bar,
   ReferenceLine
 } from 'recharts';
 import { 
-  TrendingUp, 
-  TrendingDown, 
   Activity, 
+  AlertTriangle, 
   BarChart3, 
+  CheckCircle, 
   LineChart as LineChartIcon,
-  Candlestick,
-  RefreshCw,
-  Download,
-  Settings,
   Maximize,
   Minimize,
-  Zap,
-  Target,
-  AlertTriangle,
-  CheckCircle,
-  Clock
+  RefreshCw,
+  Settings,
+  Target
 } from 'lucide-react';
 
 // Chart data types
@@ -74,7 +67,7 @@ export default function AdvancedCharting() {
   const [chartData, setChartData] = useState<ChartDataPoint[]>([]);
   const [selectedSymbol, setSelectedSymbol] = useState('AAPL');
   const [timeframe, setTimeframe] = useState('1d');
-  const [chartType, setChartType] = useState<'line' | 'candlestick' | 'area' | 'volume'>('candlestick');
+  const [chartType, setChartType] = useState<'line' | 'area' | 'bar'>('line');
   const [indicators, setIndicators] = useState<TechnicalIndicator[]>([]);
   const [patterns, setPatterns] = useState<ChartPattern[]>([]);
   const [supportResistance, setSupportResistance] = useState<SupportResistance | null>(null);
@@ -332,7 +325,7 @@ export default function AdvancedCharting() {
           </ResponsiveContainer>
         );
 
-      case 'volume':
+      default: // bar
         return (
           <ResponsiveContainer width="100%" height={400}>
             <BarChart data={chartData}>
@@ -351,50 +344,6 @@ export default function AdvancedCharting() {
                 fill="#8b5cf6"
               />
             </BarChart>
-          </ResponsiveContainer>
-        );
-
-      default: // candlestick
-        return (
-          <ResponsiveContainer width="100%" height={400}>
-            <LineChart data={chartData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis 
-                dataKey="timestamp" 
-                tickFormatter={(value) => new Date(value).toLocaleTimeString()}
-              />
-              <YAxis domain={['dataMin - 5', 'dataMax + 5']} />
-              <Tooltip 
-                labelFormatter={(value) => new Date(value).toLocaleString()}
-                formatter={(value: number) => [formatCurrency(value), 'Price']}
-              />
-              {/* Support and resistance lines */}
-              {supportResistance && supportResistance.support.map((level, index) => (
-                <ReferenceLine 
-                  key={`support-${index}`}
-                  y={level} 
-                  stroke="#10b981" 
-                  strokeDasharray="5 5"
-                  label={{ value: `S${index + 1}`, position: 'insideBottomLeft' }}
-                />
-              ))}
-              {supportResistance && supportResistance.resistance.map((level, index) => (
-                <ReferenceLine 
-                  key={`resistance-${index}`}
-                  y={level} 
-                  stroke="#ef4444" 
-                  strokeDasharray="5 5"
-                  label={{ value: `R${index + 1}`, position: 'insideTopLeft' }}
-                />
-              ))}
-              <Line 
-                type="monotone" 
-                dataKey="close" 
-                stroke="#2563eb" 
-                strokeWidth={2}
-                dot={false}
-              />
-            </LineChart>
           </ResponsiveContainer>
         );
     }
@@ -464,10 +413,9 @@ export default function AdvancedCharting() {
               <label className="text-sm font-medium mb-2 block">Chart Type</label>
               <div className="grid grid-cols-2 gap-2">
                 {[
-                  { value: 'candlestick', icon: Candlestick, label: 'Candlestick' },
                   { value: 'line', icon: LineChartIcon, label: 'Line' },
                   { value: 'area', icon: BarChart3, label: 'Area' },
-                  { value: 'volume', icon: Activity, label: 'Volume' }
+                  { value: 'bar', icon: Activity, label: 'Bar' }
                 ].map(({ value, icon: Icon, label }) => (
                   <Button
                     key={value}

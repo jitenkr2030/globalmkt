@@ -7,23 +7,7 @@ import Footer from '@/components/Footer';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { 
-  BarChart3, 
-  LineChart, 
-  Candlestick, 
-  TrendingUp, 
-  Target, 
-  Activity,
-  Zap,
-  RefreshCw,
-  Download,
-  Settings,
-  Maximize,
-  Eye,
-  Calculator,
-  Brain,
-  AlertCircle
-} from 'lucide-react';
+import { Activity, AlertCircle, BarChart3, Brain, Calculator, Download, Eye, LineChart, RefreshCw, Target, Zap } from 'lucide-react';
 
 export default function ChartingPage() {
   const [activeFeature, setActiveFeature] = useState('overview');
@@ -73,11 +57,11 @@ export default function ChartingPage() {
   ];
 
   const chartTypes = [
-    { name: 'Candlestick', description: 'Shows open, high, low, and close prices for each period', icon: Candlestick },
+    { name: 'Candlestick', description: 'Shows open, high, low, and close prices for each period', icon: BarChart3 },
     { name: 'Line Chart', description: 'Connects closing prices with a continuous line', icon: LineChart },
     { name: 'Area Chart', description: 'Filled line chart showing price movements', icon: Activity },
     { name: 'Volume Chart', description: 'Displays trading volume over time', icon: BarChart3 },
-    { name: 'Heikin-Ashi', description: 'Candlestick chart that filters noise', icon: Candlestick },
+    { name: 'Heikin-Ashi', description: 'Candlestick chart that filters noise', icon: BarChart3 },
     { name: 'Renko Chart', description: 'Price-based chart that filters minor movements', icon: BarChart3 }
   ];
 

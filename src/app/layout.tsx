@@ -5,8 +5,8 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'NEPSE Integration Framework',
-  description: 'Nepal Stock Exchange integration with comprehensive market analytics',
+  title: 'BSE/NSE Integration Framework',
+  description: 'Stock Exchange integration with comprehensive market analytics',
 }
 
 export default function RootLayout({

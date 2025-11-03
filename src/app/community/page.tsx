@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import SocialTrading from '@/components/SocialTrading';
-import { Users, MessageSquare, Calendar, Trophy, Star, ExternalLink, Github, Twitter, Discord, Slack, BookOpen, Video, Podcast, TrendingUp, BarChart3, Code, Globe, Eye, Clock } from 'lucide-react';
+import { Users, MessageSquare, Calendar, Trophy, ExternalLink, Github, Twitter, Slack, BookOpen, TrendingUp, BarChart3, Code, Globe, Eye, Clock } from 'lucide-react';
 import Link from 'next/link';
 
 export default function CommunityPage() {
@@ -138,7 +138,7 @@ export default function CommunityPage() {
     {
       name: 'Discord Server',
       description: 'Real-time chat and community discussions',
-      icon: Discord,
+      icon: MessageSquare,
       members: '8,500+',
       link: '#discord',
       color: 'bg-purple-100 text-purple-800'
